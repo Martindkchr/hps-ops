@@ -13,3 +13,6 @@
 /k8s-config/
 /kubectl
 /tridentctl
+
+# ide
+.idea/*
