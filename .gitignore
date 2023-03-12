@@ -8,8 +8,8 @@
 /admin.conf
 /config*/
 !/config.example/
-/roles/galaxy/
-/collections/*
+#/roles/galaxy/
+#/collections/*
 /k8s-config/
 /kubectl
 /tridentctl

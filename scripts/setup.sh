@@ -109,7 +109,8 @@ if command -v virtualenv &> /dev/null ; then
 	fi
     fi
 
-    as_user "${PIP} install -q --upgrade \
+    #as_user "${PIP} install -q --upgrade \
+    as_user "${PIP} install --upgrade \
         ansible==${ANSIBLE_VERSION} \
 	ansible-lint==${ANSIBLE_LINT_VERSION} \
         Jinja2==${JINJA2_VERSION} \
