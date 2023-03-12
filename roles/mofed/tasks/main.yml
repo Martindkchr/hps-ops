@@ -67,3 +67,8 @@
     path: "{{ mofed_download_dir }}"
     state: "absent"
   when: mofed_do_install and mofed_cleanup_install_dir
+
+- name: restart openibd
+  shell: /etc/init.d/openibd restart
+
+
