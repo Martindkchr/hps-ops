@@ -6,9 +6,14 @@
     mode: "0755"
   tags: pyxis
 
+- name: copy pyxis source from ansible host
+  copy:
+    src: "{{ slurm_pyxis_tarball_url2 }}"
+    dest: /tmp/archive.tar.gz
+
 - name: copy pyxis source
   unarchive:
-    src: "{{ slurm_pyxis_tarball_url }}"
+    src: /tmp/archive.tar.gz
     remote_src: yes
     dest: /usr/local/src/pyxis
     extra_opts:
