@@ -3,11 +3,11 @@ docker_login_state: present
 docker_login_reauth: yes
 docker_login_disable_log_password: yes
 
-#docker_login_registries:
+docker_login_registries:
 #- registry: docker.io
 #  username: myuser
 #  password: mypassword
 #  email: docker@docker.io
-#- registry: nvcr.io
-#  username: '$oauthtoken'
-#  password: mypassword
+- registry: nvcr.io
+  username: '$oauthtoken'
+  password: dGJybjM3cTVmZmE2cmlzZzV1NnU1aDRmZ2U6MmI0ZWIwYmEtZmEwMC00NTE0LTg3ODMtMDgzYjU0ZjMxNTJj

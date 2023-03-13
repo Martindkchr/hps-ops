@@ -26,3 +26,7 @@
     name: "{{ cuda_version }}"
     state: present
 
+- name: Ubuntu | install cuda..
+  package:
+    name: "{{ cuda_version2 }}"
+    state: present
