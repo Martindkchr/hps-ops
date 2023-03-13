@@ -1,0 +1,16 @@
+---
+# Singularity target version
+singularity_version: "3.7.1"
+
+singularity_conf_path: "/usr/local/etc/singularity/singularity.conf"
+
+bind_paths: []
+# example
+# - /shared/home/
+# - /shared/project/
+
+# go variables
+only_one_go_version: false
+golang_gopath: /opt/go/packages
+
+singularity_role_debug: false
