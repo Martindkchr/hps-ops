@@ -18,6 +18,14 @@
   environment: "{{proxy_env if proxy_env is defined else {}}}"
   when: nvidia_driver_add_repos | bool
 
+## 修改为国内源
+- name: Replace string in file
+  replace:
+    path: /etc/apt/sources.list.d/cuda-ubuntu2004-x86_64.list  # 指定需要替换的文件路径
+    regexp: 'developer.download.nvidia.com'  # 指定需要被替换的字符串
+    replace: 'developer.download.nvidia.cn'  # 指定新字符串
+  ignore_errors: yes
+
 - name: force an apt update
   apt:
     update_cache: true
