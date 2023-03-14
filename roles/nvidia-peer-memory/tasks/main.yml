@@ -10,6 +10,10 @@
     - ansible_local['gpus']['count']
     - is_dgx.stat.exists
 
+## 挂模块
+- name: Modprobe nvidia_peermem
+  shell: modprobe nvidia_peermem
+
 - name: Modprobe nv_peer_mem
   modprobe:
     name: nv_peer_mem
