@@ -42,13 +42,21 @@
     mode: "0755"
   when: nhc_build
 
-- name: download nhc src
-  get_url:
-    url: "{{ nhc_src_url }}"
+#- name: download nhc src
+#  get_url:
+#    url: "{{ nhc_src_url }}"
+#    dest: "{{ nhc_build_dir }}/nhc-{{ nhc_version }}.tar.xz"
+#    mode: "0644"
+#  environment: "{{ proxy_env if proxy_env is defined else {} }}"
+#  when: nhc_build
+
+- name: copy pkg from local
+  copy:
+    src:  /data/hpc_res/lbnl-nhc-1.4.2.tar.xz
     dest: "{{ nhc_build_dir }}/nhc-{{ nhc_version }}.tar.xz"
     mode: "0644"
-  environment: "{{ proxy_env if proxy_env is defined else {} }}"
   when: nhc_build
+
 
 - name: extract nhc src
   unarchive:
