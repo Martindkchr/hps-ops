@@ -141,12 +141,14 @@
   tags:
     - pyxis
 
+# 挂载nvdia-peer-memory 会导致 openibd.service 无法重启
+# Install mlnx-ofed-driver
+- include: utilities/mofed.yml
+  tags:
+    - mlnx-ofed-driver
+
 # Ensure that nv_peer_mem is loaded
 - include: nvidia-software/nvidia-peer-memory.yml
   tags:
     - nvidia-peer-memory
 
-# Install mlnx-ofed-driver
-- include: utilities/mofed.yml
-  tags:
-    - mlnx-ofed-driver

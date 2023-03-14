@@ -41,18 +41,28 @@
     mode: "0755"
   when: mofed_do_install
 
-- name: download mofed distribution
-  get_url:
-    url: "{{ mofed_download_url }}"
-    dest: "{{ mofed_download_dir }}/{{ mofed_download_dest }}"
+- name: copy MLNX src from localcluster
+  copy:
+    src:  /data/hpc_res/MLNX_OFED_LINUX-5.8-1.0.1.1-ubuntu20.04-x86_64.tgz
+    dest: "/tmp/MLNX_OFED_LINUX-5.8-1.0.1.1-ubuntu20.04-x86_64.tgz"
+    mode: "0644"
   when: mofed_do_install
+
+#- name: download mofed distribution
+#  get_url:
+#    url: "{{ mofed_download_url }}"
+#    dest: "{{ mofed_download_dir }}/{{ mofed_download_dest }}"
+#  when: mofed_do_install
 
 - name: extract mofed distribution
   unarchive:
-    src: "{{ mofed_download_dir }}/{{ mofed_download_dest }}"
+    #src: "{{ mofed_download_dir }}/{{ mofed_download_dest }}"
+    src: "/tmp/MLNX_OFED_LINUX-5.8-1.0.1.1-ubuntu20.04-x86_64.tgz"
     remote_src: true
     dest: "{{ mofed_download_dir }}"
   when: mofed_do_install
+
+
 
 - name: execute mlnxofedinstall
   shell: 
@@ -69,6 +79,6 @@
   when: mofed_do_install and mofed_cleanup_install_dir
 
 - name: restart openibd
-  shell: /etc/init.d/openibd restart
+  shell: systemctl restart openibd
 
 
