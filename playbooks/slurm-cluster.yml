@@ -65,11 +65,11 @@
 ## Install DCGM
 #- include: nvidia-software/nvidia-dcgm.yml hostlist=slurm-node
 #  when: install_dcgm|default(false)
-#
-## Install Node Health Check
-#- include: slurm-cluster/nhc.yml hostlist=slurm-node
-#  when: slurm_install_nhc|default(false)
-#
+
+# Install Node Health Check
+- include: slurm-cluster/nhc.yml hostlist=slurm-node
+  when: slurm_install_nhc|default(false)
+
 # Install Slurm
 - include: slurm-cluster/slurm.yml
 

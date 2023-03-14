@@ -30,7 +30,8 @@
     name: "nvidia-dcgm.service"
     state: "started"
     enabled: true
-  when: '"nvidia-dcgm.service" in services'
+  #when: '"nvidia-dcgm.service" in services'
+  #when: 'services is defined and "nvidia-dcgm.service" in services'
   tags:
   - molecule-notest
 

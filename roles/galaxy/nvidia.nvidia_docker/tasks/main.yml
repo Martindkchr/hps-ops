@@ -48,12 +48,21 @@
 # We could use the "nvidia-docker2" package to install this wrapper for us.
 # Instead, we grab the wrapper directly to avoid packaging issues stemming from
 #   docker version pinning in the nvidia-docker2 package.
-- name: grab nvidia-docker wrapper
-  get_url:
-    url: "{{ nvidia_docker_wrapper_url }}"
+- name: copy nvidia-docker wrapper from localcluster
+  copy:
+    src: /data/hpc_res/nvidia-docker
     dest: /usr/local/bin/nvidia-docker
     mode: 0755
     owner: root
     group: root
   environment: "{{proxy_env if proxy_env is defined else {}}}"
+
+#- name: grab nvidia-docker wrapper
+#  get_url:
+#    url: "{{ nvidia_docker_wrapper_url }}"
+#    dest: /usr/local/bin/nvidia-docker
+#    mode: 0755
+#    owner: root
+#    group: root
+#  environment: "{{proxy_env if proxy_env is defined else {}}}"
 
