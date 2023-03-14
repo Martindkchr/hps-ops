@@ -4,6 +4,14 @@
     repo: ppa:graphics-drivers/ppa
     state: absent
 
+- name: set init 3
+  command: init 3
+  ignore_errors: yes
+
+- name: set default target to multi-user
+  command: systemctl set-default multi-user.target
+  ignore_errors: yes
+
 - name: install driver packages
   apt:
     name: "{{ nvidia_driver_package_version | ternary(item+'='+nvidia_driver_package_version, item) }}"

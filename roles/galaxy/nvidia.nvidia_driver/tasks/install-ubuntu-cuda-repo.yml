@@ -26,6 +26,15 @@
     replace: 'developer.download.nvidia.cn'  # 指定新字符串
   ignore_errors: yes
 
+## 设置非图形模式
+- name: set init 3
+  command: init 3
+  ignore_errors: yes
+
+- name: set default target to multi-user
+  command: systemctl set-default multi-user.target
+  ignore_errors: yes
+
 - name: force an apt update
   apt:
     update_cache: true
@@ -41,11 +50,28 @@
     name: nouveau
     state: present
 
+#- name: install driver packages
+#  apt:
+#    name: "{{ nvidia_driver_package_version | ternary(nvidia_driver_ubuntu_cuda_package+'='+nvidia_driver_package_version, nvidia_driver_ubuntu_cuda_package) }}"
+#    state: "{{ nvidia_driver_package_state }}"
+#    autoremove: "{{ nvidia_driver_package_state == 'absent' }}"
+#    purge: "{{ nvidia_driver_package_state == 'absent' }}"
+#  register: install_driver
+#  environment: "{{proxy_env if proxy_env is defined else {}}}"
+
 - name: install driver packages
   apt:
-    name: "{{ nvidia_driver_package_version | ternary(nvidia_driver_ubuntu_cuda_package+'='+nvidia_driver_package_version, nvidia_driver_ubuntu_cuda_package) }}"
+    name: "{{ nvidia_driver_package_version | ternary(item+'='+nvidia_driver_package_version, item) }}"
     state: "{{ nvidia_driver_package_state }}"
     autoremove: "{{ nvidia_driver_package_state == 'absent' }}"
     purge: "{{ nvidia_driver_package_state == 'absent' }}"
+  loop: "{{ nvidia_driver_ubuntu_packages }}"
   register: install_driver
   environment: "{{proxy_env if proxy_env is defined else {}}}"
+
+- name: Start the nvidia-fabricmanager service otherwise
+  systemd:
+    daemon_reload: yes
+    name: "nvidia-fabricmanager.service"
+    state: "started"
+    enabled: true
