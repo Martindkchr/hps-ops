@@ -149,9 +149,18 @@
     mode: "0755"
   when: slurm_build
 
+- name: copy slurm-src from localcluster
+  copy:
+    src: /data/hpc_res/slurm-22.05.2.tar.bz2
+    dest: "/tmp/slurm-22.05.2.tar.bz2"
+    mode: "0644"
+  when: slurm_build
+
+
 - name: download source
   unarchive:
-    src: "{{ slurm_src_url }}"
+    #src: "{{ slurm_src_url }}"
+    src: "/tmp/slurm-22.05.2.tar.bz2"
     remote_src: yes
     dest: "{{ slurm_build_dir }}"
     extra_opts:

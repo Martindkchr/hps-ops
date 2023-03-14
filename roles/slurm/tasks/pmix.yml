@@ -91,9 +91,17 @@
     mode: "0755"
   when: pmix_build
 
+- name: copy pmix from localcluster
+  copy:
+    src:  /data/hpc_res/pmix-3.2.3.tar.bz2
+    dest: "/tmp/pmix-3.2.3.tar.bz2"
+    mode: "0644"
+  when: pmix_build
+
 - name: download pmix source
   unarchive:
-    src: "{{ pmix_src_url }}"
+    #src: "{{ pmix_src_url }}"
+    src: "/tmp/pmix-3.2.3.tar.bz2"
     remote_src: yes
     dest: "{{ pmix_build_dir }}"
     extra_opts:
