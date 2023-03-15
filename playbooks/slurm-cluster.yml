@@ -62,9 +62,9 @@
 #    hostlist: "{{ nfs_client_group | default('slurm-nfs-client') }}"
 #  when: slurm_enable_nfs_client_nodes
 
-# Install DCGM
-- include: nvidia-software/nvidia-dcgm.yml hostlist=slurm-node
-  when: install_dcgm|default(false)
+## Install DCGM
+#- include: nvidia-software/nvidia-dcgm.yml hostlist=slurm-node
+#  when: install_dcgm|default(false)
 
 ## Install Node Health Check
 #- include: slurm-cluster/nhc.yml hostlist=slurm-node
@@ -73,9 +73,9 @@
 ## Install Slurm
 #- include: slurm-cluster/slurm.yml
 #
-## Install OpenMPI
-#- include: slurm-cluster/openmpi.yml
-#  when: slurm_cluster_install_openmpi|default(true)
+# Install OpenMPI
+- include: slurm-cluster/openmpi.yml
+  when: slurm_cluster_install_openmpi|default(true)
 #
 ## Install Lmod
 #- include: slurm-cluster/lmod.yml

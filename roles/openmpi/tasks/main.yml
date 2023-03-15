@@ -26,16 +26,16 @@
   set_fact:
     openmpi_build: yes
 
-- name: check installed openmpi version
-  shell: "{{ openmpi_install_prefix }}/bin/ompi_info | grep 'Open MPI:' | awk '{print $3}'"
-  register: openmpi_info_version
-  ignore_errors: yes
-  changed_when: openmpi_info_version.rc != 0
+#- name: check installed openmpi version
+#  shell: "{{ openmpi_install_prefix }}/bin/ompi_info | grep 'Open MPI:' | awk '{print $3}'"
+#  register: openmpi_info_version
+#  ignore_errors: yes
+#  changed_when: openmpi_info_version.rc != 0
 
-- name: don't build openmpi if it's already installed, unless forced
-  set_fact:
-    openmpi_build: no
-  when: openmpi_info_version.stdout == openmpi_version and not openmpi_force_rebuild
+#- name: don't build openmpi if it's already installed, unless forced
+#  set_fact:
+#    openmpi_build: no
+#  when: openmpi_info_version.stdout == openmpi_version and not openmpi_force_rebuild
 
 - name: install openmpi build dependencies
   apt:
