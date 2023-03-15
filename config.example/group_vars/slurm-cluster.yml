@@ -43,7 +43,7 @@ slurm_ha_state_save_location: "/sw/slurm"
 slurm_restrict_node_access: true
 
 # List users who should always be able to SSH, even without a running job
-slurm_allow_ssh_user: []
+slurm_allow_ssh_user: [inspur]
 
 # Enable a Slurm compute node to also function as a login node.
 # This is needed for the "single node Slurm cluster" configuration.
@@ -133,9 +133,9 @@ sm_install_host: "slurm-master[0]"
 slurm_install_hpcsdk: true
 
 # Select the version of HPC SDK to download
-hpcsdk_major_version: "22"
+hpcsdk_major_version: "23"
 hpcsdk_minor_version: "1"
-hpcsdk_file_cuda: "11.5"
+hpcsdk_file_cuda: "12.0"
 hpcsdk_arch: "x86_64"
 
 # In a Slurm cluster, default to setting up HPC SDK as modules rather than in
@@ -151,7 +151,7 @@ hpcsdk_install_in_path: false
 # using the OpenMPI provided in the HPC SDK, but if you need a custom build,   #
 # this can help you get started.
 ################################################################################
-slurm_cluster_install_openmpi: false
+slurm_cluster_install_openmpi: true
 openmpi_version: 4.0.4
 openmpi_install_prefix: "/usr/local"
 openmpi_configure: "./configure --prefix={{ openmpi_install_prefix }} --disable-dependency-tracking --disable-getpwuid --with-pmix={{ pmix_install_prefix }} --with-hwloc={{ hwloc_install_prefix }} --with-pmi={{ slurm_install_prefix }} --with-slurm={{ slurm_install_prefix }} --with-libevent=/usr"

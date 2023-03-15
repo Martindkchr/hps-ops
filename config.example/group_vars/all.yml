@@ -58,6 +58,7 @@ software_extra_packages:
   - wget
   - build-essential
   - linux-tools-generic
+  - tree
 #  - "{{ 'linux-headers-' + ansible_kernel }}"
 #software_remove_packages:
 #  - popularity-contest
@@ -122,7 +123,7 @@ sftp_chroot: false
 ################################################################################
 # NVIDIA GPU configuration
 # Playbook: nvidia-cuda
-cuda_version: cuda-toolkit-11-5
+cuda_version: cuda-toolkit-12-1
 
 # DGX-specific vars may be used to target specific models,
 # because available versions for DGX may differ from the generic repo
@@ -134,7 +135,8 @@ cuda_version: cuda-toolkit-11-5
 # Resets the Gpu clocks to the default values. (see the `--reset-gpu-clocks` flag in nvidia-smi for more)
 gpu_clock_reset: no
 # Specifies <minGpuClock,maxGpuClock> clocks as a pair (e.g. 1500,1500) that defines the range of desired locked GPU clock speed in MHz. Setting this will supersede application clocks and take effect regardless if an app is running. Input can also be a singular desired clock value. (see the `--lock-gpu-clocks` flag in nvidia-smi for more)
-gpu_clock_lock: "1507,1507"
+#gpu_clock_lock: "1507,1507"
+gpu_clock_lock: "1215,1410"
 
 # Debugging var: force install NVIDIA driver even if GPU not detected
 nvidia_driver_force_install: false
@@ -159,14 +161,14 @@ docker_iptables_enabled: true
 # Docker daemon logins
 #   Note: example only! you should put these in an Ansible Vault file for security!
 #
-#docker_login_registries:
+docker_login_registries:
 #- registry: docker.io
 #  username: myuser
 #  password: mypassword
 #  email: docker@docker.io
-#- registry: nvcr.io
-#  username: '$oauthtoken'
-#  password: mypassword
+- registry: nvcr.io
+  username: '$oauthtoken'
+  password: dGJybjM3cTVmZmE2cmlzZzV1NnU1aDRmZ2U6MmI0ZWIwYmEtZmEwMC00NTE0LTg3ODMtMDgzYjU0ZjMxNTJj
 
 # Enroot configuration
 # Playbook: slurm, slurm-cluster
